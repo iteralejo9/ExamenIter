@@ -51,6 +51,17 @@ class LiveMedicina extends Component
         $this->fill($m->toArray());
         $this->medicina_id = $m->id;
     }
+     public function delete($id)
+    {
+        Medicina::findOrFail($id)->delete();
+        session()->flash('mensaje', 'Medicina eliminada exitosamente.');
+    }
+
+    public function resetFields()
+    {
+        $this->reset(['medicina_id', 'nombre', 'principio_activo', 'concentracion', 'laboratorio', 'stock', 'precio', 'fecha_vencimiento', 'categoria', 'estado']);
+        $this->estado = true;
+    }
 
   
 }
