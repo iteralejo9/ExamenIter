@@ -30,6 +30,45 @@
             <button type="button" wire:click="resetFields" class="bg-red-600 text-balck px-4 py-2 rounded hover:bg-red-600">Limpiar</button>
         </div>
     </form>
+    tabla:<table class="w-full bg-white border">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="p-2 border">ID</th>
+                <th class="p-2 border">Nombre</th>
+                <th class="p-2 border">Principio Activo</th>
+                <th class="p-2 border">Concentración</th>
+                <th class="p-2 border">Laboratorio</th>
+                <th class="p-2 border">Stock</th>
+                <th class="p-2 border">Precio</th>
+                <th class="p-2 border">Vencimiento</th>
+                <th class="p-2 border">Categoría</th>
+                <th class="p-2 border">Estado</th>
+                <th class="p-2 border">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($medicinas as $m)
+                <tr class="text-center">
+                    <td class="border p-1">{{ $m->id }}</td>
+                    <td class="border p-1">{{ $m->nombre }}</td>
+                    <td class="border p-1">{{ $m->principio_activo }}</td>
+                    <td class="border p-1">{{ $m->concentracion }}</td>
+                    <td class="border p-1">{{ $m->laboratorio }}</td>
+                    <td class="border p-1">{{ $m->stock }}</td>
+                    <td class="border p-1">${{ number_format($m->precio, 2) }}</td>
+                    <td class="border p-1">{{ $m->fecha_vencimiento }}</td>
+                    <td class="border p-1">{{ $m->categoria }}</td>
+                    <td class="border p-1">{{ $m->estado ? 'Activo' : 'Descontinuado' }}</td>
+                    <td class="border p-1 space-x-2">
+                        <button wire:click="edit({{ $m->id }})" class="text-green-600 hover:underline">Editar</button>
+                        <button wire:click="delete({{ $m->id }})" class="text-red-600 hover:underline">Eliminar</button>
+                    </td>
+                </tr>
+            @empty
+                <tr><td colspan="11" class="text-center py-4 text-gray-500">No hay medicinas registradas.</td></tr>
+            @endforelse
+        </tbody>
+    </table>
 
     
 </div>
