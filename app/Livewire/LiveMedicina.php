@@ -45,6 +45,12 @@ class LiveMedicina extends Component
 
         $this->resetFields();
     }
+     public function edit($id)
+    {
+        $m = Medicina::findOrFail($id);
+        $this->fill($m->toArray());
+        $this->medicina_id = $m->id;
+    }
 
   
 }
