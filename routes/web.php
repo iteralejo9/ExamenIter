@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\LiveMedicina;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', LiveMedicina::class)->name('dashboard');
+});
 
 Route::view('/', 'welcome');
 
